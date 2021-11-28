@@ -1,5 +1,7 @@
 package ir.maktab.models;
 
+import java.util.Objects;
+
 public class Borrow {
     private  String discName;
     private  Date date;
@@ -21,4 +23,16 @@ public class Borrow {
         return false;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Borrow borrow = (Borrow) o;
+        return discName.equals(borrow.discName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(discName);
+    }
 }
