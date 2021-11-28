@@ -1,10 +1,11 @@
 package ir.maktab.models;
 
+import java.text.ParseException;
 import java.util.*;
 
 public class Person {
-    private  String name;
-    private List<Borrow> borrowSet=new ArrayList<>();
+    private String name;
+    private List<Borrow> borrowSet = new ArrayList<>();
 
     public Person(String name) {
         this.name = name;
@@ -13,21 +14,30 @@ public class Person {
     public String getName() {
         return name;
     }
-    public  int getLateDate(){
-        ////////////TODO
-        return  0;
+
+    public long getLateDate(String name,int index) throws ParseException {
+        long day=0;
+        for (int j = index + 1; j < borrowSet.size(); j++) {
+            if (name.equalsIgnoreCase(borrowSet.get(j).getDiscName())) {
+                if (borrowSet.get(index).isLate(borrowSet.get(j).getDate())) {
+                    day = Date.differenceDates(borrowSet.get(index).getDate(), borrowSet.get(j).getDate());
+                }
+            }
+        }
+        return day;
     }
 
     public List<Borrow> getBorrowList() {
         return borrowSet;
     }
 
-    public  void borrow(Disc disc, Date date){
-        Borrow borrow=new Borrow(disc.getName(),date);
+    public void borrow(Disc disc, Date date) {
+        Borrow borrow = new Borrow(disc.getName(), date);
         borrowSet.add(borrow);
 
     }
-    public  void deliver(Disc disc,Date date){
+
+    public void deliver(Disc disc, Date date) {
 
     }
 
@@ -49,6 +59,6 @@ public class Person {
         return "Person{" +
                 "name='" + name + '\'' +
                 ", borrowSet=" + borrowSet +
-                '}'+"\n";
+                '}' + "\n";
     }
 }
