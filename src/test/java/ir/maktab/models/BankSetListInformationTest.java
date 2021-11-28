@@ -14,16 +14,16 @@ public class BankSetListInformationTest {
     @BeforeEach
     void init() {
         System.out.println("before each test ");
-        infoFile=new File("resource/info.csv");
-        bank=new Bank();
+        infoFile = new File("resource/info.csv");
+        bank = new Bank();
     }
 
     @Test
     void givenNumber_WhereSetListInformationCalls_ThenResponseReturn() {
-        List<String> list=List.of("1 3 98 sara java","2 5 65 reza office","5 3 98 sara java");
+        List<String> list = List.of("1 3 98 sara java", "2 5 65 reza office", "5 3 98 sara java");
         bank.setListInformation(list);
-        long result=infoFile.length();
-        Assertions.assertTrue(true, String.valueOf(result>0));
+        long result = infoFile.length();
+        Assertions.assertTrue(true, String.valueOf(result > 0));
     }
 
 }

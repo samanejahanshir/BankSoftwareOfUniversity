@@ -66,7 +66,7 @@ public class Bank {
         }
     }
 
-    private void checkValidation(String event) {
+    public void checkValidation(String event) {
         String[] eventSplit = event.split(" ");
         Date.isValidDate(Integer.parseInt(eventSplit[2]), Integer.parseInt(eventSplit[1]), Integer.parseInt(eventSplit[0]));
         checkValidationName(eventSplit[3]);
@@ -76,7 +76,7 @@ public class Bank {
         }
     }
 
-    private void checkValidationName(String name) {
+    public void checkValidationName(String name) {
         if (name.length() < 2) {
             throw new InvalidInputException("length of name < 2 !! ");
         }
