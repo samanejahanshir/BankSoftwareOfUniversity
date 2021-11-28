@@ -1,5 +1,7 @@
 package ir.maktab.models;
 
+import ir.maktab.exceptions.InvalidInputException;
+
 public class Date {
     private  int year;
     private  int month;
@@ -28,7 +30,7 @@ public class Date {
     public void setDay(int day) {
         this.day = day;
     }
-    public boolean isValidDate(int year, int month, int day) {
+    public static boolean isValidDate(int year, int month, int day) {
         if (year > 0 && year <= 9999 && month > 0 && month <= 12) {
             if (month > 0 && month < 7 && day > 0 && day <=31) {
                 return true;
@@ -37,10 +39,11 @@ public class Date {
             } else if (month == 12 && day > 0 && day <= 29) {
                 return true;
             } else {
-                return false;
+                throw  new InvalidInputException("format date is invalid");
             }
         }
-        return false;
+        throw  new InvalidInputException("format date is invalid");
+
     }
 
     @Override
