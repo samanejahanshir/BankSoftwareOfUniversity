@@ -13,6 +13,7 @@ public class Bank {
     public static Set<Disc> discSet = new HashSet<>();
     public int fine = 200;
     static final String PATH_FILE_INFO = "resource/info.csv";
+    static final String TITr_INPUT = "day month year personName softwareName\n";
 
     public Bank() {
         discSet = Set.of(new Disc("java")
@@ -24,10 +25,13 @@ public class Bank {
     public void setListInformation(List<String> events) {
         File infoFile = new File(PATH_FILE_INFO);
         try (OutputStream infoFileWrite = new FileOutputStream(infoFile, true)) {
+            if (infoFile.length() == 0) {
+                infoFileWrite.write(TITr_INPUT.getBytes());
+            }
             for (String event : events) {
                 try {
                     checkValidation(event);
-                    infoFileWrite.write(("\n" + event).getBytes());
+                    infoFileWrite.write((event+"\n").getBytes());
                 } catch (RuntimeException e) {
                     System.out.println(event + " : " + e.getMessage());
                 }
@@ -90,8 +94,8 @@ public class Bank {
         try {
             for (Person person : personSet) {
                 for (int i = 0; i < person.getBorrowList().size() - 1; i++) {
-                    long day=person.getLateDate(person.getBorrowList().get(i).getDiscName(),i);
-                    if(day>0) {
+                    long day = person.getLateDate(person.getBorrowList().get(i).getDiscName(), i);
+                    if (day > 0) {
                         totalFine += (day - 7) * fine;
                     }
                 }
