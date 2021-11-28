@@ -6,9 +6,8 @@ public class Disc {
     private  String name;
     private  TypeDisc type;
 
-    public Disc(String name, TypeDisc type) {
+    public Disc(String name) {
         this.name = name;
-        this.type = type;
     }
 
     public String getName() {
