@@ -1,0 +1,9 @@
+ir\maktab\models\Person.class
+ir\maktab\exceptions\InvalidFormatNameException.class
+ir\maktab\view\Main.class
+ir\maktab\models\Bank.class
+ir\maktab\models\Borrow.class
+ir\maktab\models\TypeDisc.class
+ir\maktab\exceptions\InvalidInputException.class
+ir\maktab\models\Date.class
+ir\maktab\models\Disc.class
