@@ -27,6 +27,7 @@ public class Main {
     private static void showMenu() {
         outer:
         while (true) {
+            printLine();
             System.out.println("1.enter list information\n2.show The amount of fines\n3.list of borrowed software\n4.exit");
             try {
                 switch (scanner.nextInt()) {
@@ -34,10 +35,18 @@ public class Main {
                         enterListInformation();
                         break;
                     case 2:
-                        bank.getPersonAmountFine();
+                        printLine();
+                        System.out.println("Fines : ");
+                        for (String personFine : bank.getPersonAmountFine()) {
+                            System.out.println(personFine);
+                        }
                         break ;
                     case 3:
-                        bank.getBorrowedSoftware();
+                        printLine();
+                        System.out.println("Borrowed software : ");
+                        for (String borrowed : bank.getBorrowedSoftware()) {
+                            System.out.println(borrowed);
+                        }
                         break ;
                     case 4:
                         break outer;
@@ -69,5 +78,8 @@ public class Main {
             System.out.println(e.getMessage());
         }
 
+    }
+    public  static void printLine(){
+        System.out.println("-----------------------------");
     }
 }
