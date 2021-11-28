@@ -3,11 +3,8 @@ package ir.maktab.models;
 import ir.maktab.exceptions.InvalidInputException;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
+import java.text.ParseException;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class Bank {
@@ -87,17 +84,41 @@ public class Bank {
         }
     }
 
-    public void getPersonAmountFine() {
-        for (Person person : personSet) {
-            
+    public List<String> getPersonAmountFine() {
+        if(personSet.isEmpty()){
+            setListOfPerson(new File(PATH_FILE_INFO));
+        }
+        int totalFine=0;
+        List<String> fineList=new ArrayList<>();
+        try {
+            for (Person person : personSet) {
+                for (int i = 0; i < person.getBorrowList().size() - 1; i++) {
+                    for (int j = i + 1; j < person.getBorrowList().size(); j++) {
+                        if (person.getBorrowList().get(i).getDiscName().equalsIgnoreCase(person.getBorrowList().get(j).getDiscName())) {
+                            if(person.getBorrowList().get(i).isLate(person.getBorrowList().get(j).getDate())) {
+                                long day = Date.differenceDates(person.getBorrowList().get(i).getDate(), person.getBorrowList().get(j).getDate());
+                                totalFine += (day-7) * fine;
+                            }
+                        }
+                    }
+
+                }
+                fineList.add(person.getName()+" : " + totalFine);
+                totalFine=0;
+            }
+        }catch (ParseException e) {
+            e.printStackTrace();
         }
 
+        return fineList;
     }
 
-    public void getBorrowedSoftware() {
+    /*public Map<String,Integer> getBorrowedSoftware() {
+        Map<String,Integer> borrowedSoftwareMap=new HashMap<>();
 
 
-    }
+
+    }*/
 
 
 }

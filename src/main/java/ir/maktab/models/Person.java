@@ -18,7 +18,7 @@ public class Person {
         return  0;
     }
 
-    public List<Borrow> getBorrowSet() {
+    public List<Borrow> getBorrowList() {
         return borrowSet;
     }
 
