@@ -6,12 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class DateIsValidDateTest {
-Date date;
-    @BeforeEach
-    void init() {
-        System.out.println("before each test ");
-        date = new Date(1,2,34);
-    }
+
     @ParameterizedTest
     @CsvSource({"89,10,2", "98,3,14"})
     void givenNumber_WhereIsValidDateCalls_ThenResponseReturn(int year, int month, int day) {
