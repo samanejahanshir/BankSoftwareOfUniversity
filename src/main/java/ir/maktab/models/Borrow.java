@@ -1,5 +1,6 @@
 package ir.maktab.models;
 
+import java.text.ParseException;
 import java.util.Objects;
 
 public class Borrow {
@@ -18,8 +19,10 @@ public class Borrow {
     public Date getDate() {
         return date;
     }
-    public  boolean isLate(Date deliveryDate){
-        //////TODO
+    public  boolean isLate(Date deliveryDate) throws ParseException {
+        if(Date.differenceDates(date,deliveryDate)>=7){
+            return  true;
+        }
         return false;
     }
 
