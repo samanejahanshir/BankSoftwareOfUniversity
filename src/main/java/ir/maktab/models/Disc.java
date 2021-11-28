@@ -30,4 +30,12 @@ public class Disc {
     public int hashCode() {
         return Objects.hash(name);
     }
+
+    @Override
+    public String toString() {
+        return "Disc{" +
+                "name='" + name + '\'' +
+                ", type=" + type +
+                '}';
+    }
 }
