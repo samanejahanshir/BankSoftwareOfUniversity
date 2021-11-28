@@ -3,8 +3,8 @@ package ir.maktab.models;
 import java.util.Objects;
 
 public class Disc {
-    private  String name;
-    private  TypeDisc type;
+    private String name;
+    private TypeDisc type;
 
     public Disc(String name) {
         this.name = name;

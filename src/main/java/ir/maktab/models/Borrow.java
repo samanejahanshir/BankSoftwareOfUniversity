@@ -4,8 +4,8 @@ import java.text.ParseException;
 import java.util.Objects;
 
 public class Borrow {
-    private  String discName;
-    private  Date date;
+    private String discName;
+    private Date date;
 
     public Borrow(String disc, Date date) {
         this.discName = disc;
@@ -19,9 +19,10 @@ public class Borrow {
     public Date getDate() {
         return date;
     }
-    public  boolean isLate(Date deliveryDate) throws ParseException {
-        if(Date.differenceDates(date,deliveryDate)>=7){
-            return  true;
+
+    public boolean isLate(Date deliveryDate) throws ParseException {
+        if (Date.differenceDates(date, deliveryDate) >= 7) {
+            return true;
         }
         return false;
     }

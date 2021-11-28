@@ -60,7 +60,6 @@ public class Bank {
         } catch (IOException e) {
             e.printStackTrace();
         }
-      //  System.out.println(personSet);
     }
 
     private void checkValidation(String event) {
@@ -91,13 +90,9 @@ public class Bank {
         try {
             for (Person person : personSet) {
                 for (int i = 0; i < person.getBorrowList().size() - 1; i++) {
-                    for (int j = i + 1; j < person.getBorrowList().size(); j++) {
-                        if (person.getBorrowList().get(i).getDiscName().equalsIgnoreCase(person.getBorrowList().get(j).getDiscName())) {
-                            if (person.getBorrowList().get(i).isLate(person.getBorrowList().get(j).getDate())) {
-                                long day = Date.differenceDates(person.getBorrowList().get(i).getDate(), person.getBorrowList().get(j).getDate());
-                                totalFine += (day - 7) * fine;
-                            }
-                        }
+                    long day=person.getLateDate(person.getBorrowList().get(i).getDiscName(),i);
+                    if(day>0) {
+                        totalFine += (day - 7) * fine;
                     }
                 }
                 fineList.add(person.getName() + " : " + totalFine);
