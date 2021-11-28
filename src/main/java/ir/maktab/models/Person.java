@@ -1,12 +1,10 @@
 package ir.maktab.models;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Person {
     private  String name;
-    private Set<Borrow> borrowSet=new HashSet<>();
+    private List<Borrow> borrowSet=new ArrayList<>();
 
     public Person(String name) {
         this.name = name;
@@ -39,5 +37,13 @@ public class Person {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", borrowSet=" + borrowSet +
+                '}'+"\n";
     }
 }
