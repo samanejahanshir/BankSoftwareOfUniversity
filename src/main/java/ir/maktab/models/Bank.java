@@ -42,7 +42,7 @@ public class Bank {
         setListOfPerson(infoFile);
     }
 
-    private void setListOfPerson(File infoFile) {
+    public void setListOfPerson(File infoFile) {
         try (InputStream infoFileRead = new FileInputStream(infoFile)) {
             Scanner scanner = new Scanner(infoFileRead);
             scanner.nextLine();

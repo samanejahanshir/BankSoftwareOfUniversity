@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.List;
 
-public class BankSetListInformationTest {
+public class BankSetListOfPersonTest {
     File infoFile;
     Bank bank;
 
@@ -19,11 +19,10 @@ public class BankSetListInformationTest {
     }
 
     @Test
-    void givenNumber_WhereSetListInformationCalls_ThenResponseReturn() {
-        List<String> list=List.of("1 3 98 sara java","2 5 65 reza office","5 3 98 sara java");
-        bank.setListInformation(list);
-        long result=infoFile.length();
+    void givenNumber_WhereSetListOfPersonCalls_ThenResponseReturn() {
+        bank.setListOfPerson(infoFile);
+        System.out.println(Bank.personSet);
+        int result=Bank.personSet.size();
         Assertions.assertTrue(true, String.valueOf(result>0));
     }
-
 }
