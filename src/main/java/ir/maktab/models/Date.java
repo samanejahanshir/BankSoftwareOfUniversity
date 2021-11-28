@@ -7,6 +7,12 @@ public class Date {
     private  int month;
     private  int day;
 
+    public Date(int year, int month, int day) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
+
     public int getYear() {
         return year;
     }
@@ -48,6 +54,6 @@ public class Date {
 
     @Override
     public String toString() {
-        return this.getDay() + " " + this.getMonth() + " " + this.getYear();
+        return this.getYear() + "/" + this.getMonth() + "/" + this.getDay();
     }
 }
