@@ -17,7 +17,12 @@ public class Person {
         ////////////TODO
         return  0;
     }
-    public  void borrow(Disc disc,Date date){
+
+    public List<Borrow> getBorrowSet() {
+        return borrowSet;
+    }
+
+    public  void borrow(Disc disc, Date date){
         Borrow borrow=new Borrow(disc.getName(),date);
         borrowSet.add(borrow);
 

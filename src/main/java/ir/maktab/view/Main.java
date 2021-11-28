@@ -63,6 +63,7 @@ public class Main {
                 System.out.println("enter : day month year personName softwareName");
                 events.add(scanner.nextLine());
             }
+            bank.fine=amountFine;
             bank.setListInformation(events);
         }catch (InputMismatchException | NumberFormatException e){
             System.out.println(e.getMessage());

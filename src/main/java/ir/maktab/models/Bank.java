@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 public class Bank {
     public static Set<Person> personSet = new HashSet<>();
     public static Set<Disc> discSet = new HashSet<>();
+    public int fine;
 
     public Bank() {
         discSet = Set.of(new Disc("java")
@@ -87,6 +88,9 @@ public class Bank {
     }
 
     public void getPersonAmountFine() {
+        for (Person person : personSet) {
+            
+        }
 
     }
 
