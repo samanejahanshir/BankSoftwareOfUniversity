@@ -35,4 +35,12 @@ public class Borrow {
     public int hashCode() {
         return Objects.hash(discName);
     }
+
+    @Override
+    public String toString() {
+        return "Borrow{" +
+                "discName='" + discName + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }
