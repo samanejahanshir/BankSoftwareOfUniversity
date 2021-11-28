@@ -3,7 +3,9 @@ package ir.maktab.view;
 import ir.maktab.exceptions.InvalidInputException;
 import ir.maktab.models.Bank;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -29,7 +31,7 @@ public class Main {
             try {
                 switch (scanner.nextInt()) {
                     case 1:
-                        bank.setListInformation();
+                        enterListInformation();
                         break;
                     case 2:
                         bank.getPersonAmountFine();
@@ -47,5 +49,24 @@ public class Main {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    private static void enterListInformation() {
+        try{
+            List<String> events=new ArrayList<>();
+            System.out.println("enter count of line and amount of fine : count fine");
+            scanner.nextLine();
+            String inputLine1=scanner.nextLine();
+            int countEvent=Integer.parseInt(inputLine1.split(" ")[0]);
+            int amountFine=Integer.parseInt(inputLine1.split(" ")[1]);
+            for(int i=0;i<countEvent;i++){
+                System.out.println("enter : day month year personName softwareName");
+                events.add(scanner.nextLine());
+            }
+            bank.setListInformation(events);
+        }catch (InputMismatchException | NumberFormatException e){
+            System.out.println(e.getMessage());
+        }
+
     }
 }
