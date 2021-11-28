@@ -6,11 +6,13 @@ import java.io.*;
 import java.text.ParseException;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Bank {
     public static Set<Person> personSet = new HashSet<>();
     public static Set<Disc> discSet = new HashSet<>();
-    public int fine;
+    public int fine = 200;
+    static final String PATH_FILE_INFO = "resource/info.csv";
 
     public Bank() {
         discSet = Set.of(new Disc("java")
@@ -19,10 +21,6 @@ public class Bank {
                 , new Disc("powerpoint"));
     }
 
-    static final String PATH_FILE_INFO = "resource/info.csv";
-
-    //static final String ORDER_INPUTS_INFO_FILE="day month year personName softwareName";
-    // public static Map<Person, HashSet<Borrow>> borrowMap = new HashMap<>();
     public void setListInformation(List<String> events) {
         File infoFile = new File(PATH_FILE_INFO);
         try (OutputStream infoFileWrite = new FileOutputStream(infoFile, true)) {
@@ -53,7 +51,7 @@ public class Bank {
                             , new Date(Integer.parseInt(eventLine[2]), Integer.parseInt(eventLine[1]), Integer.parseInt(eventLine[0])));
                     personSet.add(person);
                 } else {
-                    Person person=new Person(eventLine[3]);
+                    Person person = new Person(eventLine[3]);
                     person.borrow(new Disc(eventLine[4])
                             , new Date(Integer.parseInt(eventLine[2]), Integer.parseInt(eventLine[1]), Integer.parseInt(eventLine[0])));
                     personSet.add(person);
@@ -62,7 +60,7 @@ public class Bank {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(personSet);
+      //  System.out.println(personSet);
     }
 
     private void checkValidation(String event) {
@@ -85,40 +83,53 @@ public class Bank {
     }
 
     public List<String> getPersonAmountFine() {
-        if(personSet.isEmpty()){
+        if (personSet.isEmpty()) {
             setListOfPerson(new File(PATH_FILE_INFO));
         }
-        int totalFine=0;
-        List<String> fineList=new ArrayList<>();
+        int totalFine = 0;
+        List<String> fineList = new ArrayList<>();
         try {
             for (Person person : personSet) {
                 for (int i = 0; i < person.getBorrowList().size() - 1; i++) {
                     for (int j = i + 1; j < person.getBorrowList().size(); j++) {
                         if (person.getBorrowList().get(i).getDiscName().equalsIgnoreCase(person.getBorrowList().get(j).getDiscName())) {
-                            if(person.getBorrowList().get(i).isLate(person.getBorrowList().get(j).getDate())) {
+                            if (person.getBorrowList().get(i).isLate(person.getBorrowList().get(j).getDate())) {
                                 long day = Date.differenceDates(person.getBorrowList().get(i).getDate(), person.getBorrowList().get(j).getDate());
-                                totalFine += (day-7) * fine;
+                                totalFine += (day - 7) * fine;
                             }
                         }
                     }
-
                 }
-                fineList.add(person.getName()+" : " + totalFine);
-                totalFine=0;
+                fineList.add(person.getName() + " : " + totalFine);
+                totalFine = 0;
             }
-        }catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
-
         return fineList;
     }
 
-    /*public Map<String,Integer> getBorrowedSoftware() {
-        Map<String,Integer> borrowedSoftwareMap=new HashMap<>();
-
-
-
-    }*/
-
-
+    public List<String> getBorrowedSoftware() {
+        if (personSet.isEmpty()) {
+            setListOfPerson(new File(PATH_FILE_INFO));
+        }
+        List<String> borrowedSoftware = new ArrayList<>();
+        long countOneSoftware = 0;
+        List<List<Borrow>> listListBorrow = personSet.stream()
+                .map(person -> person.getBorrowList()).collect(Collectors.toList());
+        for (Disc disc : discSet) {
+            for (List<Borrow> borrows : listListBorrow) {
+                for (Borrow borrow : borrows) {
+                    if (borrow.getDiscName().equalsIgnoreCase(disc.getName())) {
+                        countOneSoftware += 1;
+                    }
+                }
+            }
+            if (countOneSoftware % 2 != 0) {
+                borrowedSoftware.add(disc.getName());
+            }
+            countOneSoftware = 0;
+        }
+        return borrowedSoftware;
+    }
 }
