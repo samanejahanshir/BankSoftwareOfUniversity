@@ -2,6 +2,7 @@ package ir.maktab.view;
 
 import ir.maktab.exceptions.InvalidInputException;
 import ir.maktab.models.Bank;
+import ir.maktab.service.BankService;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -10,7 +11,7 @@ import java.util.Scanner;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
-    static Bank bank = new Bank();
+    static BankService bankService = new BankService();
 
     public static void main(String[] args) {
         System.out.println("---------- Welcome ----------");
@@ -38,14 +39,14 @@ public class Main {
                     case 2:
                         printLine();
                         System.out.println("Fines : ");
-                        for (String personFine : bank.getPersonAmountFine()) {
+                        for (String personFine : bankService.getPersonAmountFine()) {
                             System.out.println(personFine);
                         }
                         break;
                     case 3:
                         printLine();
                         System.out.println("Borrowed software : ");
-                        for (String borrowed : bank.getBorrowedSoftware()) {
+                        for (String borrowed : bankService.getBorrowedSoftware()) {
                             System.out.println(borrowed);
                         }
                         break;
@@ -72,8 +73,8 @@ public class Main {
                 System.out.println("enter : day month year personName softwareName");
                 events.add(scanner.nextLine());
             }
-            bank.fine = amountFine;
-            bank.setListInformation(events);
+            Bank.fine = amountFine;
+            bankService.setListInformation(events);
         } catch (InputMismatchException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
         }

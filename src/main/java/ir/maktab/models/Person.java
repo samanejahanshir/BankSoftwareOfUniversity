@@ -1,7 +1,9 @@
 package ir.maktab.models;
 
 import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class Person {
     private String name;
@@ -15,8 +17,8 @@ public class Person {
         return name;
     }
 
-    public long getLateDate(String name,int index) throws ParseException {
-        long day=0;
+    public long getLateDate(String name, int index) throws ParseException {
+        long day = 0;
         for (int j = index + 1; j < borrowSet.size(); j++) {
             if (name.equalsIgnoreCase(borrowSet.get(j).getDiscName())) {
                 if (borrowSet.get(index).isLate(borrowSet.get(j).getDate())) {
