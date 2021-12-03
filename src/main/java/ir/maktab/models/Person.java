@@ -33,13 +33,13 @@ public class Person {
         return borrowSet;
     }
 
-    public void borrow(Disc disc, Date date) {
+    public void borrow(DiscImp disc, Date date) {
         Borrow borrow = new Borrow(disc.getName(), date);
         borrowSet.add(borrow);
 
     }
 
-    public void deliver(Disc disc, Date date) {
+    public void deliver(DiscImp disc, Date date) {
 
     }
 

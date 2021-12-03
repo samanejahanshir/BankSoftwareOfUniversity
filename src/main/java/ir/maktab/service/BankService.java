@@ -41,12 +41,12 @@ public class BankService {
                 if (Bank.personSet.contains(new Person(eventLine[3]))) {
                     Person person = Bank.personSet.stream().filter(i -> i.getName().equalsIgnoreCase(eventLine[3])).findAny().get();
                     Bank.personSet.remove(person);
-                    person.borrow(new Disc(eventLine[4])
+                    person.borrow(new DiscImp(eventLine[4])
                             , new Date(Integer.parseInt(eventLine[2]), Integer.parseInt(eventLine[1]), Integer.parseInt(eventLine[0])));
                     Bank.personSet.add(person);
                 } else {
                     Person person = new Person(eventLine[3]);
-                    person.borrow(new Disc(eventLine[4])
+                    person.borrow(new DiscImp(eventLine[4])
                             , new Date(Integer.parseInt(eventLine[2]), Integer.parseInt(eventLine[1]), Integer.parseInt(eventLine[0])));
                     Bank.personSet.add(person);
                 }
@@ -61,7 +61,7 @@ public class BankService {
         Date.isValidDate(Integer.parseInt(eventSplit[2]), Integer.parseInt(eventSplit[1]), Integer.parseInt(eventSplit[0]));
         checkValidationName(eventSplit[3]);
         checkValidationName(eventSplit[4]);
-        if (!Bank.discSet.contains(new Disc(eventSplit[4]))) {
+        if (!Bank.discSet.stream().filter(discImp -> discImp.getName().equalsIgnoreCase(eventSplit[4])).findAny().isPresent()) {
             throw new RuntimeException(eventSplit[4] + " there isn't in list of software !");
         }
     }
@@ -106,7 +106,7 @@ public class BankService {
         long countOneSoftware = 0;
         List<List<Borrow>> listListBorrow = Bank.personSet.stream()
                 .map(person -> person.getBorrowList()).collect(Collectors.toList());
-        for (Disc disc : Bank.discSet) {
+        for (DiscImp disc : Bank.discSet) {
             for (List<Borrow> borrows : listListBorrow) {
                 for (Borrow borrow : borrows) {
                     if (borrow.getDiscName().equalsIgnoreCase(disc.getName())) {

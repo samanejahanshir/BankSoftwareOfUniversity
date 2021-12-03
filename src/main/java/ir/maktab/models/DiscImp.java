@@ -2,12 +2,16 @@ package ir.maktab.models;
 
 import java.util.Objects;
 
-public class Disc {
+public  class DiscImp implements  Disc {
     private String name;
     private TypeDisc type;
 
-    public Disc(String name) {
+    public DiscImp(String name) {
         this.name = name;
+    }
+    public DiscImp(String name,TypeDisc type){
+        this.name=name;
+        this.type=type;
     }
 
     public String getName() {
@@ -22,7 +26,7 @@ public class Disc {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Disc disc = (Disc) o;
+        DiscImp disc = (DiscImp) o;
         return name.equals(disc.name);
     }
 

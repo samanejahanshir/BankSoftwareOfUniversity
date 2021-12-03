@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
-import java.util.List;
 
 public class PersonGetLateDateTest {
     Person person;
@@ -16,8 +15,8 @@ public class PersonGetLateDateTest {
     }
     @Test
     void givenNumber_WhereGetLateDateCalls_ThenResponseReturn() throws ParseException {
-       person.borrow(new Disc("java"),new Date(99,7,6));
-        person.borrow(new Disc("java"),new Date(99,7,17));
+       person.borrow(new DiscImp("java"),new Date(99,7,6));
+        person.borrow(new DiscImp("java"),new Date(99,7,17));
         long day=person.getLateDate("java",0);
         Assertions.assertEquals(11, day);
 
